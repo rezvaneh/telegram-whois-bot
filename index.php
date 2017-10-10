@@ -11,12 +11,13 @@ $whois = new Smoqadam\Whois();
 
 $tg->cmd('\/start', function ($domain) use ($tg, $whois) {
     $keyboard = ['keyboard' => [
-        [['text' => "\xF0\x9F\x94\x8E". 'بررسی دامنه'],['text' => "\xE2\x9D\x93". 'راهنما'],['text' => "\xE2\x9C\x85". 'کوتینت']],
-    ],
+        [['text' => "\xE2\x9C\x85". ' کوتینت'],['text' => "\xF0\x9F\x94\x8E". ' بررسی دامنه'],['text' => "\xE2\x9D\x93". 'راهنما']],
+        ],
+        'resize_keyboard' => true
     ];
 
     $text = '
-    سلام دوست عزی
+    سلام دوست عزیز
 این ربات به منظور بررسی ثبت یا عدم ثبت یک دامنه با پسوند های مختلف در وب سایت های مرجع ایجاد شده است.
 استفاده از این ربات بسیار سادست، تنها کافی است بر روی دکمه  🔎بررسی دامنه  کلیک کنید و سپس در باکس متن نامه دامنه خود را به همراه پسوند مربوطه تایپ کنید و ارسال کنید. پاسخ ربات به دو صورت است:
 
@@ -46,8 +47,9 @@ $tg->cmd('\/start', function ($domain) use ($tg, $whois) {
  */
 $tg->cmd("\xE2\x9D\x93" . 'راهنما', function ($domain) use ($tg, $whois) {
     $keyboard = ['keyboard' => [
-        [['text' => "\xF0\x9F\x94\x8E". 'بررسی دامنه'],['text' => "\xE2\x9D\x93". 'راهنما'],['text' => "\xE2\x9C\x85". 'کوتینت']],
-        ],
+        [['text' => "\xE2\x9C\x85". ' کوتینت'],['text' => "\xF0\x9F\x94\x8E". ' بررسی دامنه'],['text' => "\xE2\x9D\x93". 'راهنما']],
+    ],
+        'resize_keyboard' => true
     ];
 
     $text = '
@@ -75,10 +77,11 @@ $tg->cmd("\xE2\x9D\x93" . 'راهنما', function ($domain) use ($tg, $whois) {
 /*
  * send about cotint
  */
-$tg->cmd("\xE2\x9C\x85". 'کوتینت', function ($domain) use ($tg, $whois) {
+$tg->cmd("\xE2\x9C\x85". ' کوتینت', function ($domain) use ($tg, $whois) {
     $keyboard = ['keyboard' => [
-        [['text' => "\xF0\x9F\x94\x8E". 'بررسی دامنه'],['text' => "\xE2\x9D\x93". 'راهنما'],['text' => "\xE2\x9C\x85". 'کوتینت']],
-        ],
+        [['text' => "\xE2\x9C\x85". ' کوتینت'],['text' => "\xF0\x9F\x94\x8E". ' بررسی دامنه'],['text' => "\xE2\x9D\x93". 'راهنما']],
+    ],
+        'resize_keyboard' => true
     ];
 
     $text = '🔖 گروه طراحی وب سایت کوتینت
@@ -103,7 +106,7 @@ There is No Tomorrow
 /*
  * get the domain information
  */
-$tg->cmd("\xF0\x9F\x94\x8E".'بررسی دامنه', function ($domain) use ($tg, $whois) {
+$tg->cmd("\xF0\x9F\x94\x8E".' بررسی دامنه', function ($domain) use ($tg, $whois) {
     $keyboard = ['hide_keyboard' => true];
     $help = 'لطفا دامنه خود را وارد کنید.';
     $tg->sendMessage($help, $tg->getChatId(),
@@ -130,8 +133,9 @@ $tg->cmd('<<:any>>', function ($domain) use ($tg, $whois) {
         $stmt->execute();
 
         $keyboard = ['keyboard' => [
-            [['text' => "\xF0\x9F\x94\x8E". 'بررسی دامنه'],['text' => "\xE2\x9D\x93". 'راهنما'],['text' => "\xE2\x9C\x85". 'کوتینت']],
-            ],
+            [['text' => "\xE2\x9C\x85". ' کوتینت'],['text' => "\xF0\x9F\x94\x8E". ' بررسی دامنه'],['text' => "\xE2\x9D\x93". 'راهنما']],
+        ],
+            'resize_keyboard' => true
         ];
         $result = $whois->isAvailable($domain);
         if ($result) {
