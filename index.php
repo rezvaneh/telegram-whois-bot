@@ -4,7 +4,7 @@ $message = file_get_contents('php://input');
 
 require 'vendor/autoload.php';
 
-$api_token = 'TOKEN';
+$api_token = '479976229:AAHHA9vu8_EFxPuIXqwcQ61XBY0VgvSSEbo';
 
 $tg = new Smoqadam\Telegram($api_token);
 $whois = new Smoqadam\Whois();
@@ -32,12 +32,14 @@ $tg->cmd('\/start', function ($domain) use ($tg, $whois) {
 ☎️ 021-22035976
 💌 info@cotint.ir';
 
+    $parse_mode = $tg::PARSE_MARKDOWN;
     $tg->sendMessage(
         $text,
         $tg->getChatId(),
         null,
         null,
-        $keyboard
+        $keyboard,
+        $parse_mode
     );
 });
 
@@ -67,10 +69,13 @@ $tg->cmd("\xE2\x9D\x93" . 'راهنما', function ($domain) use ($tg, $whois) {
 ✅ Cotint.ir
 ☎️ 021-22035976
 💌 info@cotint.ir';
+    $parse_mode = $tg::PARSE_MARKDOWN;
     $tg->sendMessage($text, $tg->getChatId(),
         null,
         null,
-        $keyboard);
+        $keyboard,
+        $parse_mode
+    );
 });
 
 
@@ -97,10 +102,13 @@ There is No Tomorrow
 📩 info@cotint.ir
 📞 021-22035976
 📢 @cotint';
+
+    $parse_mode = $tg::PARSE_MARKDOWN;
     $tg->sendMessage($text, $tg->getChatId(),
         null,
         null,
-        $keyboard);
+        $keyboard,
+        $parse_mode);
 });
 
 /*
@@ -109,19 +117,23 @@ There is No Tomorrow
 $tg->cmd("\xF0\x9F\x94\x8E".' بررسی دامنه', function ($domain) use ($tg, $whois) {
     $keyboard = ['hide_keyboard' => true];
     $help = 'لطفا دامنه خود را وارد کنید.';
+    $parse_mode = $tg::PARSE_MARKDOWN;
     $tg->sendMessage($help, $tg->getChatId(),
         null,
         null,
-        $keyboard);
+        $keyboard,
+        $parse_mode);
 });
 
 $tg->cmd('<<:any>>', function ($domain) use ($tg, $whois) {
     if (!preg_match('/^(?:[-A-Za-z0-9]+\.)+[A-Za-z]{2,6}$/', $domain)) {
         $keyboard = ['hide_keyboard' => true];
+        $parse_mode = $tg::PARSE_MARKDOWN;
         $tg->sendMessage('دامنه صحیح وارد کنید.', $tg->getChatId(),
             null,
             null,
-            $keyboard);
+            $keyboard,
+            $parse_mode);
 
         return;
     } else {
@@ -137,15 +149,16 @@ $tg->cmd('<<:any>>', function ($domain) use ($tg, $whois) {
         ],
             'resize_keyboard' => true
         ];
+        $parse_mode = $tg::PARSE_MARKDOWN;
         $result = $whois->isAvailable($domain);
         if ($result) {
             $text ='این دامنه قبلا ثبت نشده است و شما میتوانید برای ثبت آن از طریق لینک زیر اقدام نمایید:
 [ثبت دامنه ](https://my.mihanwebhost.com/domainchecker.php)
 ';
-            $tg->sendMessage($text, $tg->getChatId(), null, null, $keyboard);
+            $tg->sendMessage($text, $tg->getChatId(), null, null, $keyboard, $parse_mode);
         } else {
             $result = $whois->getDomainInfo($domain);
-            $tg->sendMessage($result, $tg->getChatId(), null, null, $keyboard);
+            $tg->sendMessage($result, $tg->getChatId(), null, null, $keyboard ,$parse_mode);
         }
     }
 });
