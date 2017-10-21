@@ -3,27 +3,27 @@
 $message = file_get_contents('php://input');
 
 require 'vendor/autoload.php';
+include 'Database/DB.php';
 
-$api_token = '479976229:AAHHA9vu8_EFxPuIXqwcQ61XBY0VgvSSEbo';
+$api_token = 'TOKEN';
 
 $tg = new Smoqadam\Telegram($api_token);
 $whois = new Smoqadam\Whois();
 
 $tg->cmd('\/start', function ($domain) use ($tg, $whois) {
     $keyboard = ['keyboard' => [
-        [['text' => "\xE2\x9C\x85". ' کوتینت'],['text' => "\xF0\x9F\x94\x8E". ' بررسی دامنه'],['text' => "\xE2\x9D\x93". 'راهنما']],
+        [['text' => "\xE2\x9C\x85".' کوتینت'], ['text' => "\xF0\x9F\x94\x8E".' بررسی دامنه'], ['text' => "\xE2\x9D\x93".'راهنما']],
         ],
-        'resize_keyboard' => true
+        'resize_keyboard' => true,
     ];
 
     $text = '
     سلام دوست عزیز
 این ربات به منظور بررسی ثبت یا عدم ثبت یک دامنه با پسوند های مختلف در وب سایت های مرجع ایجاد شده است.
 استفاده از این ربات بسیار سادست، تنها کافی است بر روی دکمه  🔎بررسی دامنه  کلیک کنید و سپس در باکس متن نامه دامنه خود را به همراه پسوند مربوطه تایپ کنید و ارسال کنید. پاسخ ربات به دو صورت است:
-
+<a href="http://cotint.ir">&#160;</a>
 1. این دامنه قبلا ثبت نشده است و شما میتوانید برای ثبت آن از طریق لینک زیر اقدام نمایید:
-[ثبت دامنه ](https://my.mihanwebhost.com/domainchecker.php)
-
+<a href="https://my.mihanwebhost.com/domainchecker.php">ثبت دامنه</a>
 2. مشخصات مالک دامنه از وب سایت مرجع Whois
 
 در صورتی که نیاز به مشاوره و راهنمایی دارید، از طریق زیر میتوانید با ما ارتباط برقرار کنید:
@@ -32,7 +32,7 @@ $tg->cmd('\/start', function ($domain) use ($tg, $whois) {
 ☎️ 021-22035976
 💌 info@cotint.ir';
 
-    $parse_mode = $tg::PARSE_MARKDOWN;
+    $parse_mode = $tg::PARSE_HTML;
     $tg->sendMessage(
         $text,
         $tg->getChatId(),
@@ -43,24 +43,23 @@ $tg->cmd('\/start', function ($domain) use ($tg, $whois) {
     );
 });
 
-
 /*
  * send about bot
  */
-$tg->cmd("\xE2\x9D\x93" . 'راهنما', function ($domain) use ($tg, $whois) {
+$tg->cmd("\xE2\x9D\x93".'راهنما', function ($domain) use ($tg, $whois) {
     $keyboard = ['keyboard' => [
-        [['text' => "\xE2\x9C\x85". ' کوتینت'],['text' => "\xF0\x9F\x94\x8E". ' بررسی دامنه'],['text' => "\xE2\x9D\x93". 'راهنما']],
+        [['text' => "\xE2\x9C\x85".' کوتینت'], ['text' => "\xF0\x9F\x94\x8E".' بررسی دامنه'], ['text' => "\xE2\x9D\x93".'راهنما']],
     ],
-        'resize_keyboard' => true
+        'resize_keyboard' => true,
     ];
 
     $text = '
     سلام دوست عزیز
 این ربات به منظور بررسی ثبت یا عدم ثبت یک دامنه با پسوند های مختلف در وب سایت های مرجع ایجاد شده است.
 استفاده از این ربات بسیار سادست، تنها کافی است بر روی دکمه  🔎بررسی دامنه  کلیک کنید و سپس در باکس متن نامه دامنه خود را به همراه پسوند مربوطه تایپ کنید و ارسال کنید. پاسخ ربات به دو صورت است:
-
+<a href="http://cotint.ir">&#160;</a>
 1.این دامنه قبلا ثبت نشده است و شما میتوانید برای ثبت آن از طریق لینک زیر اقدام نمایید:
-[ثبت دامنه ](https://my.mihanwebhost.com/domainchecker.php)
+<a href="https://my.mihanwebhost.com/domainchecker.php">ثبت دامنه</a>
 
 2. مشخصات مالک دامنه از وب سایت مرجع Whois
 
@@ -69,7 +68,7 @@ $tg->cmd("\xE2\x9D\x93" . 'راهنما', function ($domain) use ($tg, $whois) {
 ✅ Cotint.ir
 ☎️ 021-22035976
 💌 info@cotint.ir';
-    $parse_mode = $tg::PARSE_MARKDOWN;
+    $parse_mode = $tg::PARSE_HTML;
     $tg->sendMessage($text, $tg->getChatId(),
         null,
         null,
@@ -78,19 +77,18 @@ $tg->cmd("\xE2\x9D\x93" . 'راهنما', function ($domain) use ($tg, $whois) {
     );
 });
 
-
 /*
  * send about cotint
  */
-$tg->cmd("\xE2\x9C\x85". ' کوتینت', function ($domain) use ($tg, $whois) {
+$tg->cmd("\xE2\x9C\x85".' کوتینت', function ($domain) use ($tg, $whois) {
     $keyboard = ['keyboard' => [
-        [['text' => "\xE2\x9C\x85". ' کوتینت'],['text' => "\xF0\x9F\x94\x8E". ' بررسی دامنه'],['text' => "\xE2\x9D\x93". 'راهنما']],
+        [['text' => "\xE2\x9C\x85".' کوتینت'], ['text' => "\xF0\x9F\x94\x8E".' بررسی دامنه'], ['text' => "\xE2\x9D\x93".'راهنما']],
     ],
-        'resize_keyboard' => true
+        'resize_keyboard' => true,
     ];
 
     $text = '🔖 گروه طراحی وب سایت کوتینت
-تمرکز اصلی فعالیت های مجموعه [کوتینت](http://cotint.ir) از سال 1389 تاکنون در زمینه طراحی سیستم های اطلاعاتی، وب اپلیکیشن، موبایل اپلیکیشن، وب سایت، ربات ها، دیجیتال مارکتینگ، مدیریت محتوای شبکه های اجتماعی و ... بوده است.
+تمرکز اصلی فعالیت های مجموعه <a href="http://cotint.ir">کوتینت</a> از سال 1389 تاکنون در زمینه طراحی سیستم های اطلاعاتی، وب اپلیکیشن، موبایل اپلیکیشن، وب سایت، ربات ها، دیجیتال مارکتینگ، مدیریت محتوای شبکه های اجتماعی و ... بوده است.
 نگاه ما به زندگی در شعار ما خلاصه می شود: 
 
 There is No Tomorrow
@@ -103,7 +101,7 @@ There is No Tomorrow
 📞 021-22035976
 📢 @cotint';
 
-    $parse_mode = $tg::PARSE_MARKDOWN;
+    $parse_mode = $tg::PARSE_HTML;
     $tg->sendMessage($text, $tg->getChatId(),
         null,
         null,
@@ -117,7 +115,7 @@ There is No Tomorrow
 $tg->cmd("\xF0\x9F\x94\x8E".' بررسی دامنه', function ($domain) use ($tg, $whois) {
     $keyboard = ['hide_keyboard' => true];
     $help = 'لطفا دامنه خود را وارد کنید.';
-    $parse_mode = $tg::PARSE_MARKDOWN;
+    $parse_mode = $tg::PARSE_HTML;
     $tg->sendMessage($help, $tg->getChatId(),
         null,
         null,
@@ -128,7 +126,7 @@ $tg->cmd("\xF0\x9F\x94\x8E".' بررسی دامنه', function ($domain) use ($t
 $tg->cmd('<<:any>>', function ($domain) use ($tg, $whois) {
     if (!preg_match('/^(?:[-A-Za-z0-9]+\.)+[A-Za-z]{2,6}$/', $domain)) {
         $keyboard = ['hide_keyboard' => true];
-        $parse_mode = $tg::PARSE_MARKDOWN;
+        $parse_mode = $tg::PARSE_HTML;
         $tg->sendMessage('دامنه صحیح وارد کنید.', $tg->getChatId(),
             null,
             null,
@@ -137,7 +135,8 @@ $tg->cmd('<<:any>>', function ($domain) use ($tg, $whois) {
 
         return;
     } else {
-        $conn = $tg->PDO();
+        $database = new DB();
+        $conn = $database->PDO();
         $stmt = $conn->prepare('INSERT INTO users(chatId, domain, created_at) VALUES(:chatId, :dom, :dates)');
         $stmt->bindParam('chatId', $tg->getChatId());
         $stmt->bindParam('dom', $domain);
@@ -145,20 +144,20 @@ $tg->cmd('<<:any>>', function ($domain) use ($tg, $whois) {
         $stmt->execute();
 
         $keyboard = ['keyboard' => [
-            [['text' => "\xE2\x9C\x85". ' کوتینت'],['text' => "\xF0\x9F\x94\x8E". ' بررسی دامنه'],['text' => "\xE2\x9D\x93". 'راهنما']],
+            [['text' => "\xE2\x9C\x85".' کوتینت'], ['text' => "\xF0\x9F\x94\x8E".' بررسی دامنه'], ['text' => "\xE2\x9D\x93".'راهنما']],
         ],
-            'resize_keyboard' => true
+            'resize_keyboard' => true,
         ];
-        $parse_mode = $tg::PARSE_MARKDOWN;
+        $parse_mode = $tg::PARSE_HTML;
         $result = $whois->isAvailable($domain);
         if ($result) {
-            $text ='این دامنه قبلا ثبت نشده است و شما میتوانید برای ثبت آن از طریق لینک زیر اقدام نمایید:
-[ثبت دامنه ](https://my.mihanwebhost.com/domainchecker.php)
+            $text = 'این دامنه قبلا ثبت نشده است و شما میتوانید برای ثبت آن از طریق لینک زیر اقدام نمایید:
+<a href="https://my.mihanwebhost.com/domainchecker.php">ثبت دامنه</a>
 ';
             $tg->sendMessage($text, $tg->getChatId(), null, null, $keyboard, $parse_mode);
         } else {
             $result = $whois->getDomainInfo($domain);
-            $tg->sendMessage($result, $tg->getChatId(), null, null, $keyboard ,$parse_mode);
+            $tg->sendMessage($result, $tg->getChatId(), null, null, $keyboard, $parse_mode);
         }
     }
 });
