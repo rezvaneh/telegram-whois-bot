@@ -152,6 +152,7 @@ $tg->cmd('<<:any>>', function ($domain) use ($tg, $whois) {
         $result = $whois->isAvailable($domain);
         if ($result) {
             $text = 'این دامنه قبلا ثبت نشده است و شما میتوانید برای ثبت آن از طریق لینک زیر اقدام نمایید:
+<a href="http://cotint.ir">&#160;</a>
 <a href="https://my.mihanwebhost.com/domainchecker.php">ثبت دامنه</a>
 ';
             $tg->sendMessage($text, $tg->getChatId(), null, null, $keyboard, $parse_mode);
